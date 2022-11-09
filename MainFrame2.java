@@ -26,8 +26,8 @@ public class MainFrame2 extends JFrame {
         frame.setVisible(true);
     }
 
-    private static final int WIDTH = 400;
-    private static final int HEIGHT = 320;
+    private static final int WIDTH = 720;
+    private static final int HEIGHT = 400;
 
     private JTextField textFieldOfX;
     private JTextField textFieldOfY;
@@ -50,8 +50,8 @@ public class MainFrame2 extends JFrame {
 
 //@ Реализация основного функционала программы
         //^ Поле для отображения вида активной формулы
-        ImageIcon imageOfFormula1 = new ImageIcon("Снимок.BMP");
-        ImageIcon imageOfFormula2 = new ImageIcon("Formula2.BMP");
+        ImageIcon imageOfFormula1 = new ImageIcon("ImgOfFormula1.BMP");
+        ImageIcon imageOfFormula2 = new ImageIcon("ImgOfFormula2.BMP");
         JLabel formula = new JLabel("");
         formula.setIcon(imageOfFormula1);
     
@@ -61,14 +61,14 @@ public class MainFrame2 extends JFrame {
         hboxShowingFormula.add(Box.createHorizontalGlue());
 
         //^ Радио-кнопки выбора активной формулы
-        JRadioButton button1 = new JRadioButton("Кнопка 1");
+        JRadioButton button1 = new JRadioButton("Формула 1");
         button1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ev){
                 formula.setIcon(imageOfFormula1);
                 formulaId = 1;
             }        
         });        
-        JRadioButton button2 = new JRadioButton("Кнопка 2");
+        JRadioButton button2 = new JRadioButton("Формула 2");
         button2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ev){
                 formula.setIcon(imageOfFormula2);
@@ -97,7 +97,7 @@ public class MainFrame2 extends JFrame {
         textFieldOfZ.setMaximumSize(textFieldOfZ.getPreferredSize());
 
         //^ Поле для вывода результата вычисления по активной формуле
-        resultField = new JTextField(10);
+        resultField = new JTextField(15);
         resultField.setMaximumSize(resultField.getPreferredSize());
 
         //^ Кнопка вычисления значиения значения функции
@@ -164,13 +164,13 @@ public class MainFrame2 extends JFrame {
         buttonsMemorySwitch.setSelected(buttonsMemorySwitch.getElements().nextElement().getModel(), true);
         
         //^ Поля для просмотра содержимого ячеек памяти
-        mem1Field = new JTextField("0", 6);
+        mem1Field = new JTextField("0", 15);
         mem1Field.setMaximumSize(mem1Field.getPreferredSize());
 
-        mem2Field = new JTextField("0",6);
+        mem2Field = new JTextField("0",15);
         mem2Field.setMaximumSize(mem2Field.getPreferredSize());
 
-        mem3Field = new JTextField("0",6);
+        mem3Field = new JTextField("0",15);
         mem3Field.setMaximumSize(mem3Field.getPreferredSize());
         
         //^ Кнопка сброса содержимого поля активной ячейки памяти
@@ -209,40 +209,128 @@ public class MainFrame2 extends JFrame {
                         mem2Field.setText(sum.toString());
                         break;
                     case(3):
-                        Double valueOfMem3 = Double.parseDouble(mem1Field.getText());
+                        Double valueOfMem3 = Double.parseDouble(mem3Field.getText());
                         sum = valueOfResult + valueOfMem3;
                         mem3Field.setText(sum.toString());
+                        break;
                 }
             }
         });
         
 //@ Создание интерфейса
-        // Box hboxCell1 = Box.createVerticalBox();
-        // hboxCell1.add(button3);
-        // hboxCell1.add(mem1Field);
-        // // hboxCell1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        // // hboxCell1.setBorder(null);
-        
-        // Box hboxCell2 = Box.createVerticalBox();
-        // hboxCell2.add(button4);
-        // hboxCell2.add(mem2Field);
-        
-        // Box hboxCell3 = Box.createVerticalBox();
-        // hboxCell3.add(button5);
-        // hboxCell3.add(mem3Field);
-        
-        // Box hboxButtonsMemorySwitch = Box.createHorizontalBox();
-        // hboxButtonsMemorySwitch.add(hboxCell1);
-        // hboxButtonsMemorySwitch.add(hboxCell2);
-        // hboxButtonsMemorySwitch.add(hboxCell3);
+        //^ Радио-кнопки для переключения формул
+        Box boxFunctionSwitch = Box.createHorizontalBox();
+        boxFunctionSwitch.add(Box.createHorizontalGlue());
+        boxFunctionSwitch.add(button1);
+        boxFunctionSwitch.add(button2);
+        boxFunctionSwitch.add(Box.createHorizontalGlue());
 
-        // Box contentBox = Box.createVerticalBox();
-        // contentBox.add(hboxButtons);
-        // contentBox.add(hboxShowingFormula);
-        // contentBox.add(hboxButtonsMemorySwitch);
-        // getContentPane().add(contentBox, BorderLayout.CENTER);
+        //^ Изображенте активной формулы
+        Box boxImgOfFormula = Box.createHorizontalBox();
+        boxImgOfFormula.add(Box.createHorizontalGlue());
+        boxImgOfFormula.add(formula);
+        boxImgOfFormula.add(Box.createHorizontalGlue());
+        
+        //^ Поля для ввода переменных x,y,z
+        JLabel labelForX = new JLabel("X:");
+        JLabel labelForY = new JLabel("Y:");
+        JLabel labelForZ = new JLabel("Z:");
 
-        // getContentPane().add(contentBox);
+        Box boxVariables = Box.createHorizontalBox();
+        boxVariables.add(Box.createHorizontalGlue());
+
+        boxVariables.add(labelForX);
+        boxVariables.add(Box.createHorizontalStrut(10));
+        boxVariables.add(textFieldOfX);
+        boxVariables.add(Box.createHorizontalStrut(40));
+
+        boxVariables.add(labelForY);
+        boxVariables.add(Box.createHorizontalStrut(10));
+        boxVariables.add(textFieldOfY);
+        boxVariables.add(Box.createHorizontalStrut(40));
+
+        boxVariables.add(labelForZ);
+        boxVariables.add(Box.createHorizontalStrut(10));
+        boxVariables.add(textFieldOfZ);
+
+        boxVariables.add(Box.createHorizontalGlue());
+        
+        //^ Результат
+        JLabel labelForResult = new JLabel("Результат:");
+
+        Box boxResult = Box.createHorizontalBox();
+        boxResult.add(Box.createHorizontalGlue());
+
+        boxResult.add(labelForResult);
+        boxResult.add(Box.createHorizontalStrut(10));
+        boxResult.add(resultField);
+        
+        boxResult.add(Box.createHorizontalGlue());
+        
+        //^ Кнопки "Вычислить", "Сброс"
+        Box boxCalculateReset = Box.createHorizontalBox();
+        boxCalculateReset.add(Box.createHorizontalGlue());
+        
+        boxCalculateReset.add(calculateButton);
+        boxCalculateReset.add(Box.createHorizontalStrut(50));
+        boxCalculateReset.add(resetButton);
+        
+        boxCalculateReset.add(Box.createHorizontalGlue());
+        
+        //^ Переключение и отображение ячеек памяти
+        Box boxMemories = Box.createHorizontalBox();
+
+        Box boxMem1 = Box.createVerticalBox();
+        boxMem1.add(button3);
+        boxMem1.add(mem1Field);
+        boxMem1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        // getContentPane().add(boxMem1, BorderLayout.CENTER);
+        
+        Box boxMem2 = Box.createVerticalBox();
+        boxMem2.add(button4);
+        boxMem2.add(mem2Field);
+
+        Box boxMem3 = Box.createVerticalBox();
+        boxMem3.add(button5);
+        boxMem3.add(mem3Field);
+        boxMemories.add(Box.createHorizontalGlue());
+        
+        boxMemories.add(boxMem1);
+        // boxMemories.add(Box.createHorizontalGlue());
+        // boxResult.add(Box.createHorizontalStrut(40));
+
+        boxMemories.add(boxMem2);
+        // boxMemories.add(Box.createHorizontalGlue());
+        // boxResult.add(Box.createHorizontalStrut(40));
+        
+        boxMemories.add(boxMem3);
+        
+        boxMemories.add(Box.createHorizontalGlue());
+        
+        //^ Кнопки очистки и суммирования к памяти
+        Box boxMemoryButtons = Box.createHorizontalBox();
+        boxMemoryButtons.add(Box.createHorizontalGlue());
+
+        boxMemoryButtons.add(memoryClear);
+        boxMemoryButtons.add(Box.createHorizontalStrut(75));
+        boxMemoryButtons.add(addToMemory);
+
+        boxMemoryButtons.add(Box.createHorizontalGlue());
+
+        //^ Итоговая компоновка
+        Box contentBox = Box.createVerticalBox();
+        contentBox.add(Box.createVerticalGlue());
+        contentBox.add(boxFunctionSwitch);
+        contentBox.add(boxImgOfFormula);
+        contentBox.add(boxVariables);
+        contentBox.add(boxResult);
+        contentBox.add(boxCalculateReset);
+        contentBox.add(Box.createVerticalGlue());
+        contentBox.add(boxMemories);
+        contentBox.add(Box.createVerticalGlue());
+        contentBox.add(boxMemoryButtons);
+        contentBox.add(Box.createVerticalGlue());
+        getContentPane().add(contentBox, BorderLayout.CENTER);
     }
 
     public Double function1(Double x, Double y, Double z){
