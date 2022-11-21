@@ -1,23 +1,25 @@
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
+// import java.awt.Color;
+// import java.awt.Dimension;
+// import java.awt.Graphics;
+// import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
+// import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+// import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import javax.swing.JTextArea;
+// import javax.swing.JTextArea;
 import javax.swing.ImageIcon;
+// import java.awt.FlowLayout;
+// import javax.swing.BoxLayout;
 
 public class MainFrame2 extends JFrame {
     public static void main(String[] args){
@@ -52,26 +54,26 @@ public class MainFrame2 extends JFrame {
         //^ Поле для отображения вида активной формулы
         ImageIcon imageOfFormula1 = new ImageIcon("ImgOfFormula1.BMP");
         ImageIcon imageOfFormula2 = new ImageIcon("ImgOfFormula2.BMP");
-        JLabel formula = new JLabel("");
-        formula.setIcon(imageOfFormula1);
+        JLabel formulaImage = new JLabel("");
+        formulaImage.setIcon(imageOfFormula1);
     
         Box hboxShowingFormula = Box.createHorizontalBox();
         hboxShowingFormula.add(Box.createHorizontalGlue());
-        hboxShowingFormula.add(formula);
+        hboxShowingFormula.add(formulaImage);
         hboxShowingFormula.add(Box.createHorizontalGlue());
 
         //^ Радио-кнопки выбора активной формулы
         JRadioButton button1 = new JRadioButton("Формула 1");
         button1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ev){
-                formula.setIcon(imageOfFormula1);
+                formulaImage.setIcon(imageOfFormula1);
                 formulaId = 1;
             }        
         });        
         JRadioButton button2 = new JRadioButton("Формула 2");
         button2.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ev){
-                formula.setIcon(imageOfFormula2);
+                formulaImage.setIcon(imageOfFormula2);
                 formulaId = 2;
             }        
         });        
@@ -164,13 +166,13 @@ public class MainFrame2 extends JFrame {
         buttonsMemorySwitch.setSelected(buttonsMemorySwitch.getElements().nextElement().getModel(), true);
         
         //^ Поля для просмотра содержимого ячеек памяти
-        mem1Field = new JTextField("0", 15);
+        mem1Field = new JTextField("0",30);
         mem1Field.setMaximumSize(mem1Field.getPreferredSize());
 
-        mem2Field = new JTextField("0",15);
+        mem2Field = new JTextField("0",30);
         mem2Field.setMaximumSize(mem2Field.getPreferredSize());
 
-        mem3Field = new JTextField("0",15);
+        mem3Field = new JTextField("0",30);
         mem3Field.setMaximumSize(mem3Field.getPreferredSize());
         
         //^ Кнопка сброса содержимого поля активной ячейки памяти
@@ -228,7 +230,7 @@ public class MainFrame2 extends JFrame {
         //^ Изображенте активной формулы
         Box boxImgOfFormula = Box.createHorizontalBox();
         boxImgOfFormula.add(Box.createHorizontalGlue());
-        boxImgOfFormula.add(formula);
+        boxImgOfFormula.add(formulaImage);
         boxImgOfFormula.add(Box.createHorizontalGlue());
         
         //^ Поля для ввода переменных x,y,z
@@ -237,23 +239,25 @@ public class MainFrame2 extends JFrame {
         JLabel labelForZ = new JLabel("Z:");
 
         Box boxVariables = Box.createHorizontalBox();
-        boxVariables.add(Box.createHorizontalGlue());
-
+        // boxVariables.add(Box.createHorizontalGlue());
+        
         boxVariables.add(labelForX);
         boxVariables.add(Box.createHorizontalStrut(10));
         boxVariables.add(textFieldOfX);
-        boxVariables.add(Box.createHorizontalStrut(40));
-
+        boxVariables.add(Box.createHorizontalGlue());
+        // boxVariables.add(Box.createHorizontalStrut(40));
+        
         boxVariables.add(labelForY);
         boxVariables.add(Box.createHorizontalStrut(10));
         boxVariables.add(textFieldOfY);
-        boxVariables.add(Box.createHorizontalStrut(40));
+        boxVariables.add(Box.createHorizontalGlue());
+        // boxVariables.add(Box.createHorizontalStrut(40));
 
         boxVariables.add(labelForZ);
         boxVariables.add(Box.createHorizontalStrut(10));
         boxVariables.add(textFieldOfZ);
 
-        boxVariables.add(Box.createHorizontalGlue());
+        // boxVariables.add(Box.createHorizontalGlue());
         
         //^ Результат
         JLabel labelForResult = new JLabel("Результат:");
@@ -283,8 +287,7 @@ public class MainFrame2 extends JFrame {
         Box boxMem1 = Box.createVerticalBox();
         boxMem1.add(button3);
         boxMem1.add(mem1Field);
-        boxMem1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        // getContentPane().add(boxMem1, BorderLayout.CENTER);
+        // boxMem1.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         
         Box boxMem2 = Box.createVerticalBox();
         boxMem2.add(button4);
